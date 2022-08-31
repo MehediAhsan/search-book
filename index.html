@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search BooK</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <header>
+        <header class="sticky top-0 z-50">
+            <div class="navbar bg-cyan-300">
+                <div class="flex-1">
+                  
+                  <button class="normal-case text-2xl font-bold text-gray-800">Library</button>
+                </div>
+                <div class="flex-none gap-2">
+                    <div class="form-control">
+                        <div class="input-group">
+                          <input id="book-field" type="text" placeholder="Search…" class="input input-bordered" />
+                          <button onclick="searchBook()" class="btn btn-square">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                          </button>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </header>
+    </header>
+    <main class="container mx-auto my-10">
+        <section>
+          <h1 class="text-5xl font-bold text-center text-orange-700 mb-10">Search your Book
+          </h1>
+        </section>
+          <section>
+              <div id="books-container" class="grid grid-cols-3 gap-4">
+                  
+              </div>
+          </section>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
