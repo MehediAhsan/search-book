@@ -1,14 +1,24 @@
-const loadBook = async(search) => {
+const loadBook = async(search, dataLimit) => {
     const url = `http://openlibrary.org/search.json?q=${search}`;
     const res = await fetch(url);
     const data = await res.json();
-    displayBook(data.docs);
+    displayBook(data.docs, dataLimit);
 }
 
-const displayBook = (books) => {
+const displayBook = (books,dataLimit) => {
     console.log(books)
     const booksContainer = document.getElementById('books-container');
     booksContainer.innerHTML = '';
+
+    // show all data
+    const showAll = document.getElementById('show-all');
+    if(dataLimit && books.length > 10){
+        books = books.slice(0,10);
+        showAll.classList.remove('hidden');
+    }
+    else{
+        showAll.classList.add('hidden');
+    }
 
     // display no book found
     const noBook = document.getElementById('no-book');
@@ -42,14 +52,26 @@ const displayBook = (books) => {
     
 }
 
-// seach a book
-const searchBook = () => {
-    //start loading
+
+const processSearch = (dataLimit) => {
     toggleSpinner(true);
     const bookField = document.getElementById('book-field');
     const bookValue = bookField.value;
-    loadBook(bookValue);
+    loadBook(bookValue,dataLimit);
 }
+
+// seach a book
+const searchBook = () => {
+    //start loading
+    processSearch(10);
+}
+
+// search by using key press enter
+document.getElementById('book-field').addEventListener('keypress', function(e){
+    if(e.key === 'Enter'){
+        processSearch(10);
+    }
+})
 
 const toggleSpinner = isLoading => {
     const loaderSection = document.getElementById('loader');
@@ -63,7 +85,11 @@ const toggleSpinner = isLoading => {
     }
 }
 
-
+document.getElementById('btn-show-all').addEventListener('click', function(){
+    processSearch();
+    // stop spinner
+    toggleSpinner(false);
+})
 
 // author details
 const loadAuthorDetails = async id => {
